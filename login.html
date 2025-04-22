@@ -1,0 +1,151 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <style>
+       // Variables
+$sidebar-bg: #333;
+$sidebar-text: white;
+$accordion-bg: #444;
+$accordion-hover: #555;
+$panel-bg: #333;
+$link-color: #ddd;
+$link-hover: white;
+$table-border: #ddd;
+$table-header: #f2f2f2;
+$button-bg: #4CAF50;
+$button-disabled: #ddd;
+
+// Base Styles
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Sidebar
+.sidebar {
+  width: 250px;
+  background-color: $sidebar-bg;
+  height: 100vh;
+  color: $sidebar-text;
+  padding-top: 20px;
+  position: fixed;
+
+  .accordion {
+    background-color: $accordion-bg;
+    color: $sidebar-text;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+
+    &:hover,
+    &.active {
+      background-color: $accordion-hover;
+    }
+  }
+
+  .panel {
+    padding: 0 18px;
+    background-color: $panel-bg;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+
+    a {
+      color: $link-color;
+      text-decoration: none;
+      display: block;
+      padding: 10px 0;
+
+      &:hover {
+        color: $link-hover;
+      }
+    }
+  }
+}
+
+// Main Content
+.content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+// Product Table
+.product-table {
+  display: none;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+
+    th,
+    td {
+      border: 1px solid $table-border;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: $table-header;
+    }
+  }
+}
+
+// Pagination
+.pagination {
+  margin-top: 20px;
+
+  button {
+    background-color: $button-bg;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-right: 5px;
+
+    &:disabled {
+      background-color: $button-disabled;
+      cursor: not-allowed;
+    }
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="error" class="error">Invalid username or password!</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'admin123') {
+                document.cookie = "session=logged_in; path=/";
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+    

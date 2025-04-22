@@ -1,0 +1,168 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dashboard</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+            .sidebar { width: 250px; background-color: #333; height: 100vh; color: white; padding-top: 20px; position: fixed; }
+            .content { margin-left: 250px; padding: 20px; }
+            .accordion { background-color: #444; color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; transition: 0.4s; }
+            .active, .accordion:hover { background-color: #555; }
+            .panel { padding: 0 18px; background-color: #333; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; }
+            .panel a { color: #ddd; text-decoration: none; display: block; padding: 10px 0; }
+            .panel a:hover { color: white; }
+            table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            .product-table { display: none; }
+            .pagination { margin-top: 20px; }
+            .pagination button { background-color: #4CAF50; color: white; border: none; padding: 8px 16px; cursor: pointer; margin-right: 5px; }
+            .pagination button:disabled { background-color: #ddd; cursor: not-allowed; }
+        </style>
+    </head>
+    <body>
+        <div class="sidebar">
+            <button class="accordion">Dashboard Tools</button>
+            <div class="panel">
+                <button class="accordion">Data Visualization</button>
+                <div class="panel">
+                    <button class="accordion">Inventory Management</button>
+                    <div class="panel">
+                        <a href="#" id="viewProducts">View Product Inventory</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Dashboard</h2>
+            <p>Welcome to the admin dashboard. Use the sidebar to navigate.</p>
+            
+            <div id="productTable" class="product-table">
+                <h3>Product Inventory</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productData">
+                        <!-- Products for page 1 -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button id="prevPage" disabled>Previous</button>
+                    <span id="pageInfo">Page 1 of 3</span>
+                    <button id="nextPage">Next</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Accordion functionality
+            var acc = document.getElementsByClassName("accordion");
+            for (var i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+            
+            // View products functionality
+            document.getElementById("viewProducts").addEventListener("click", function(e) {
+                e.preventDefault();
+                document.getElementById("productTable").style.display = "block";
+                loadProducts(1);
+            });
+            
+            // Product data
+            const allProducts = [
+                // Page 1
+                { id: "P001", name: "Laptop", category: "Electronics", price: "$999.99", stock: "15", status: "In Stock" },
+                { id: "P002", name: "Smartphone", category: "Electronics", price: "$699.99", stock: "25", status: "In Stock" },
+                { id: "P003", name: "Tablet", category: "Electronics", price: "$349.99", stock: "10", status: "Low Stock" },
+                { id: "P004", name: "Headphones", category: "Electronics", price: "$149.99", stock: "30", status: "In Stock" },
+                { id: "P005", name: "Monitor", category: "Electronics", price: "$249.99", stock: "8", status: "Low Stock" },
+                // Page 2
+                { id: "P006", name: "Desk Chair", category: "Furniture", price: "$199.99", stock: "12", status: "In Stock" },
+                { id: "P007", name: "Office Desk", category: "Furniture", price: "$299.99", stock: "5", status: "Low Stock" },
+                { id: "P008", name: "Bookshelf", category: "Furniture", price: "$149.99", stock: "0", status: "Out of Stock" },
+                { id: "P009", name: "Coffee Table", category: "Furniture", price: "$129.99", stock: "7", status: "Low Stock" },
+                { id: "P010", name: "Bed Frame", category: "Furniture", price: "$399.99", stock: "3", status: "Low Stock" },
+                // Page 3
+                { id: "P011", name: "T-Shirt", category: "Clothing", price: "$19.99", stock: "50", status: "In Stock" },
+                { id: "P012", name: "Jeans", category: "Clothing", price: "$49.99", stock: "20", status: "In Stock" },
+                { id: "P013", name: "Sweater", category: "Clothing", price: "$39.99", stock: "15", status: "In Stock" },
+                { id: "P014", name: "Jacket", category: "Clothing", price: "$89.99", stock: "8", status: "Low Stock" },
+                { id: "P015", name: "Sneakers", category: "Footwear", price: "$79.99", stock: "12", status: "In Stock" }
+            ];
+
+            // Products per page
+            const productsPerPage = 5;
+            let currentPage = 1;
+            const totalPages = Math.ceil(allProducts.length / productsPerPage);
+            
+            // Load products for a specific page
+            function loadProducts(page) {
+                currentPage = page;
+                const start = (page - 1) * productsPerPage;
+                const end = start + productsPerPage;
+                const pageProducts = allProducts.slice(start, end);
+                
+                const tableBody = document.getElementById("productData");
+                tableBody.innerHTML = "";
+                
+                pageProducts.forEach(product => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.category}</td>
+                        <td>${product.price}</td>
+                        <td>${product.stock}</td>
+                        <td>${product.status}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+                
+                // Update pagination controls
+                document.getElementById("pageInfo").textContent = `Page ${page} of ${totalPages}`;
+                document.getElementById("prevPage").disabled = page === 1;
+                document.getElementById("nextPage").disabled = page === totalPages;
+            }
+            
+            // Pagination event listeners
+            document.getElementById("prevPage").addEventListener("click", function() {
+                if (currentPage > 1) {
+                    loadProducts(currentPage - 1);
+                }
+            });
+            
+            document.getElementById("nextPage").addEventListener("click", function() {
+                if (currentPage < totalPages) {
+                    loadProducts(currentPage + 1);
+                }
+            });
+            
+            // Check if user is logged in
+            function checkLogin() {
+                return document.cookie.includes("session=logged_in");
+            }
+            
+            // Redirect to login if not logged in
+            if (!checkLogin()) {
+                window.location.href = "login.html";
+            }
+        </script>
+    </body>
+    </html>
+    

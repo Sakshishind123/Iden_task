@@ -1,0 +1,122 @@
+[
+  {
+    "ID": "P001",
+    "Product Name": "Laptop",
+    "Category": "Electronics",
+    "Price": "$999.99",
+    "Stock": "15",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P002",
+    "Product Name": "Smartphone",
+    "Category": "Electronics",
+    "Price": "$699.99",
+    "Stock": "25",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P003",
+    "Product Name": "Tablet",
+    "Category": "Electronics",
+    "Price": "$349.99",
+    "Stock": "10",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P004",
+    "Product Name": "Headphones",
+    "Category": "Electronics",
+    "Price": "$149.99",
+    "Stock": "30",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P005",
+    "Product Name": "Monitor",
+    "Category": "Electronics",
+    "Price": "$249.99",
+    "Stock": "8",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P006",
+    "Product Name": "Desk Chair",
+    "Category": "Furniture",
+    "Price": "$199.99",
+    "Stock": "12",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P007",
+    "Product Name": "Office Desk",
+    "Category": "Furniture",
+    "Price": "$299.99",
+    "Stock": "5",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P008",
+    "Product Name": "Bookshelf",
+    "Category": "Furniture",
+    "Price": "$149.99",
+    "Stock": "0",
+    "Status": "Out of Stock"
+  },
+  {
+    "ID": "P009",
+    "Product Name": "Coffee Table",
+    "Category": "Furniture",
+    "Price": "$129.99",
+    "Stock": "7",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P010",
+    "Product Name": "Bed Frame",
+    "Category": "Furniture",
+    "Price": "$399.99",
+    "Stock": "3",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P011",
+    "Product Name": "T-Shirt",
+    "Category": "Clothing",
+    "Price": "$19.99",
+    "Stock": "50",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P012",
+    "Product Name": "Jeans",
+    "Category": "Clothing",
+    "Price": "$49.99",
+    "Stock": "20",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P013",
+    "Product Name": "Sweater",
+    "Category": "Clothing",
+    "Price": "$39.99",
+    "Stock": "15",
+    "Status": "In Stock"
+  },
+  {
+    "ID": "P014",
+    "Product Name": "Jacket",
+    "Category": "Clothing",
+    "Price": "$89.99",
+    "Stock": "8",
+    "Status": "Low Stock"
+  },
+  {
+    "ID": "P015",
+    "Product Name": "Sneakers",
+    "Category": "Footwear",
+    "Price": "$79.99",
+    "Stock": "12",
+    "Status": "In Stock"
+  }
+]
